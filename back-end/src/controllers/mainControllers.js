@@ -8,11 +8,11 @@ module.exports = {
    */
   getUsers: async (req, res) => {
     const pageLimit = 10;
-    const pageNumber = req.query?.p > 0 ? req.query.p : 0;
+    const pageNumber = req.query?.p > 0 ? req.query.p : 1;
     try {
       const users = await db.Users.findAll({
         limit: pageLimit,
-        offset: pageNumber * pageLimit,
+        offset: (pageNumber - 1) * pageLimit,
       });
       res.json({ status: 200, data: users });
     } catch (error) {
