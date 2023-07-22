@@ -1,5 +1,6 @@
 const db = require("../../database/models");
 const { v4: uuidV4 } = require("uuid");
+const bcryptjs = require("bcryptjs");
 
 module.exports = {
   /**
@@ -22,8 +23,8 @@ module.exports = {
   },
 
   /**
-   * Controlador que devuelve un usuario en base al id que viaja por el query parameter.
-   * @param {String} req.params.id Id del usuario que viaja dentro del query parameter.
+   * Controlador que devuelve un usuario en base al id que viaja por el route parameter "id".
+   * @param {String} req.params.id Id del usuario que viaja dentro del route parameter.
    */
   getOneUser: async (req, res) => {
     try {
@@ -59,7 +60,7 @@ module.exports = {
       first_name: req.body.firstName,
       last_name: req.body.lastName,
       email: req.body.email,
-      password: "hash",
+      password: bcryptjs.hashSync(req.body.password, 8),
       avatar: "img",
       dni: Number(req.body.dni),
     };
