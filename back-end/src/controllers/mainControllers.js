@@ -3,11 +3,17 @@ const { v4: uuidV4 } = require("uuid");
 
 module.exports = {
   /**
-   * Controlador que devuelve todos los usuarios.
+   * Controlador que devuelve todos los usuarios, paginados de 10 en 10, gracias a una query parameter.
+   * @param {Number} req.query.p Número de página que se quiere ver.
    */
   getUsers: async (req, res) => {
+    const pageLimit = 10;
+    const pageNumber = req.query?.p > 0 ? req.query.p : 0;
     try {
-      const users = await db.Users.findAll();
+      const users = await db.Users.findAll({
+        limit: pageLimit,
+        offset: pageNumber * pageLimit,
+      });
       res.json({ status: 200, data: users });
     } catch (error) {
       console.log(error);
