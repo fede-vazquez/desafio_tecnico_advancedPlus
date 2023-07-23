@@ -33,10 +33,7 @@ function DropDownUserMenu() {
     >
       <figure className="flex items-center">
         <img
-          src={
-            process.env.REACT_APP_SERVER_URL +
-            process.env.REACT_APP_DEFAULT_AVATAR_ROUTE
-          }
+          src={process.env.REACT_APP_DEFAULT_AVATAR_ROUTE}
           alt="avatar de usuario"
           className=" h-10 rounded-full bg-stone-200 p-0.5 border-stone-400 border-2"
         />

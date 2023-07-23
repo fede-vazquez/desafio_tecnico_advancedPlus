@@ -8,7 +8,7 @@ function NavBar() {
     <nav className="text-xl flex gap-4 justify-between px-3 py-2">
       <Link to={"/"}>
         <img
-          src="/sn-logo.png"
+          src="/logos/sn-logo.png"
           alt="icono de la página"
           className="h-10 w-auto"
         />
