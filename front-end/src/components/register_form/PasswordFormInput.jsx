@@ -26,7 +26,7 @@ function PasswordFormInput({ id, name, value, placeholder, handleChange }) {
           type={showPassword ? "text" : "password"}
           name={name}
           value={value}
-          className=" rounded-md py-2 ps-2 my-1.5 w-full"
+          className="form-input"
           placeholder={placeholder}
           onChange={(e) => {
             handleChange(name, e.target.value);

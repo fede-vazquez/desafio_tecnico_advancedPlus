@@ -8,19 +8,18 @@ import React from "react";
  * @param {String} value Valor del input.
  * @param {String} placeholder Texto que va detrás del input.
  * @param {Function} handleChange Función que cambia el valor.
- * @param {String} type Tipo de input, puede ser: text o email
  * @returns Retorna un input con las configuraciones seleccionadas.
  */
-function FormInputText({ id, name, value, placeholder, handleChange, type }) {
+function DateFormInput({ id, name, value, placeholder, handleChange }) {
   return (
-    <label htmlFor={id}>
+    <label htmlFor={id} className="">
       <input
+        type="date"
         id={id}
-        type={type}
         name={name}
         value={value}
-        className="form-input"
         placeholder={placeholder}
+        className="form-input pe-5"
         onChange={(e) => {
           handleChange(name, e.target.value);
         }}
@@ -29,4 +28,4 @@ function FormInputText({ id, name, value, placeholder, handleChange, type }) {
   );
 }
 
-export default FormInputText;
+export default DateFormInput;

@@ -2,11 +2,13 @@ import React from "react";
 import useForm from "../../hooks/useForm";
 import FormInput from "./FormInput";
 import PasswordFormInput from "./PasswordFormInput";
+import DateFormInput from "./DateFormInput";
 
 const prevFormValues = {
   firstName: "",
   lastName: "",
   email: "",
+  birthDate: "",
   password: "",
   confirmPassword: "",
 };
@@ -44,13 +46,18 @@ function MainRegisterForm() {
           handleChange={handleChange}
           type={"email"}
         />
+        <DateFormInput
+          id={"formBirthDateInput"}
+          name={"birthDate"}
+          value={form.birthDate}
+          handleChange={handleChange}
+        />
         <PasswordFormInput
           id={"formPasswordInput"}
           name={"password"}
           value={form.password}
           placeholder={"Contraseña"}
           handleChange={handleChange}
-          type={"password"}
         />
         <PasswordFormInput
           id={"formConfirmPasswordInput"}
@@ -58,7 +65,6 @@ function MainRegisterForm() {
           value={form.confirmPassword}
           placeholder={"Confirmar contraseña"}
           handleChange={handleChange}
-          type={"confirmPassword"}
         />
       </form>
     </section>
