@@ -12,7 +12,8 @@ import React from "react";
  */
 function DateFormInput({ id, name, value, placeholder, handleChange }) {
   return (
-    <label htmlFor={id} className="">
+    <label htmlFor={id}>
+      <span className="text-white relative top-2">Fecha de nacimiento</span>
       <input
         type="date"
         id={id}
