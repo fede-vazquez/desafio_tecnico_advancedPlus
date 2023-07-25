@@ -2,9 +2,9 @@ import { useState } from "react";
 
 /**
  * Hook personalizado para trabajar con el formulario.
- * @param {Object} formData Fatos iniciales del formulario.
+ * @param {Object} formData Datos iniciales del formulario.
  */
-function useForm({ formData }) {
+function useForm(formData) {
   const [form, setForm] = useState(formData);
 
   /**

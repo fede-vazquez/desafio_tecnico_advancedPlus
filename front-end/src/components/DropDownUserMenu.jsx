@@ -23,7 +23,7 @@ function DropDownUserMenu() {
   }
   return (
     <div
-      className="bg-stone-200 hover:bg-stone-300 rounded-xl cursor-pointer"
+      className="bg-white hover:bg-stone-200 rounded-xl cursor-pointer"
       onClick={() => {
         switchActive();
       }}
