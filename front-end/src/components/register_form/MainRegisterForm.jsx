@@ -3,11 +3,14 @@ import useForm from "../../hooks/useForm";
 import FormInput from "./FormInput";
 import PasswordFormInput from "./PasswordFormInput";
 import DateFormInput from "./DateFormInput";
+import DniFormInput from "./DniFormInput";
+import { validationsForm } from "../../validations/validationsForm";
 
 const prevFormValues = {
   firstName: "",
   lastName: "",
   email: "",
+  dni: "",
   birthDate: "",
   password: "",
   confirmPassword: "",
@@ -18,7 +21,11 @@ const prevFormValues = {
  * @returns Retorna el formulario.
  */
 function MainRegisterForm() {
-  const { form, handleChange } = useForm(prevFormValues);
+  const { form, handleChange, errors, handleSubmitForm } = useForm(
+    prevFormValues,
+    validationsForm
+  );
+
   return (
     <section className=" bg-blue-500 p-3">
       <form>
@@ -46,12 +53,6 @@ function MainRegisterForm() {
           handleChange={handleChange}
           type={"email"}
         />
-        <DateFormInput
-          id={"formBirthDateInput"}
-          name={"birthDate"}
-          value={form.birthDate}
-          handleChange={handleChange}
-        />
         <PasswordFormInput
           id={"formPasswordInput"}
           name={"password"}
@@ -64,6 +65,18 @@ function MainRegisterForm() {
           name={"confirmPassword"}
           value={form.confirmPassword}
           placeholder={"Confirmar contraseña"}
+          handleChange={handleChange}
+        />
+        <DniFormInput
+          id={"formDniInput"}
+          name={"dni"}
+          value={form.dni}
+          handleChange={handleChange}
+        />
+        <DateFormInput
+          id={"formBirthDateInput"}
+          name={"birthDate"}
+          value={form.birthDate}
           handleChange={handleChange}
         />
       </form>
