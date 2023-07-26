@@ -1,7 +1,7 @@
 /**
  * Array con validaciones, para que sea más simple validar cada una.
  */
-export const validationsForm = [
+export const validationsRegister = [
   {
     name: "firstName",
     validation: (value) => {
@@ -44,7 +44,7 @@ export const validationsForm = [
   {
     name: "confirmPassword",
     validation: (value) => {
-      return value.trim().length <= 0;
+      return value.trim().length < 0;
     },
     msg: "Debes confirmar la contraseña.",
   },

@@ -4,7 +4,7 @@ import FormInput from "./FormInput";
 import PasswordFormInput from "./PasswordFormInput";
 import DateFormInput from "./DateFormInput";
 import DniFormInput from "./DniFormInput";
-import { validationsForm } from "../../validations/validationsForm";
+import { validationsRegister } from "../../validations/validationsRegister";
 
 const prevFormValues = {
   firstName: "",
@@ -23,12 +23,16 @@ const prevFormValues = {
 function MainRegisterForm() {
   const { form, handleChange, errors, handleSubmitForm } = useForm(
     prevFormValues,
-    validationsForm
+    validationsRegister
   );
 
   return (
     <section className=" bg-blue-500 p-3">
-      <form>
+      <form
+        onSubmit={(e) => {
+          handleSubmitForm(e, form);
+        }}
+      >
         <FormInput
           id={"formFirstNameInput"}
           name={"firstName"}
@@ -86,6 +90,7 @@ function MainRegisterForm() {
           handleChange={handleChange}
           error={errors.birthDate}
         />
+        <button>enviar</button>
       </form>
     </section>
   );

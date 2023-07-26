@@ -25,7 +25,29 @@ function useForm(formData, validations) {
     });
   }
 
-  function handleSubmitForm(e) {}
+  /**
+   * Función que verifica cada una de las validaciones.
+   * @param {Object} event Evento de submit del formulario.
+   * @param {Object} form Formulario que se va a validar.
+   */
+  function handleSubmitForm(event, form) {
+    event.preventDefault();
+
+    const nameInputsForm = Object.keys(form);
+
+    let errors = [];
+
+    nameInputsForm.forEach((nameInput) => {
+      errors = validationsFormInputs(
+        nameInput,
+        form[nameInput],
+        validations,
+        errors
+      );
+    });
+
+    setErrors(errors);
+  }
 
   return { form, errors, handleChange, handleSubmitForm };
 }

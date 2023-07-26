@@ -25,7 +25,7 @@ function DniFormInput({ id, name, value, placeholder, handleChange, error }) {
           <span className="my-auto text-white">dni</span>
         </div>
         <input
-          type="text"
+          type="number"
           id={id}
           name={name}
           value={value}
