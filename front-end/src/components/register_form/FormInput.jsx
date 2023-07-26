@@ -11,7 +11,7 @@ import React from "react";
  * @param {String} type Tipo de input, puede ser: text o email
  * @returns Retorna un input con las configuraciones seleccionadas.
  */
-function FormInputText({ id, name, value, placeholder, handleChange, type }) {
+function FormInput({ id, name, value, placeholder, handleChange, type }) {
   return (
     <label htmlFor={id}>
       <input
@@ -29,4 +29,4 @@ function FormInputText({ id, name, value, placeholder, handleChange, type }) {
   );
 }
 
-export default FormInputText;
+export default FormInput;

@@ -18,7 +18,6 @@ export const validationsFormInputs = (
 
   if (validationSelected) {
     if (!validationSelected.validation(valueInput)) {
-      console.log(errors);
       errors[nameInput] = { msg: validationSelected.msg };
     } else {
       delete errors[nameInput];
