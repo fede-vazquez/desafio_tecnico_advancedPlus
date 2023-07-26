@@ -3,5 +3,13 @@
 @tailwind utilities;
 
 .form-input {
-  @apply rounded-md py-2 ps-2 my-1.5 w-full;
+  @apply rounded-md py-2 ps-2 w-full;
+}
+
+.alert-text {
+  @apply relative bottom-1 ps-2 align-text-top text-sm text-white font-bold;
+}
+
+.border-alert {
+  @apply border-red-600 border-4;
 }

@@ -36,6 +36,7 @@ function MainRegisterForm() {
           placeholder={"Nombre"}
           handleChange={handleChange}
           type={"text"}
+          error={errors.firstName}
         />
         <FormInput
           id={"formLastNameInput"}
@@ -44,6 +45,7 @@ function MainRegisterForm() {
           placeholder={"Apellido"}
           handleChange={handleChange}
           type={"text"}
+          error={errors.lastName}
         />
         <FormInput
           id={"formEmailInput"}
@@ -52,6 +54,7 @@ function MainRegisterForm() {
           placeholder={"Email"}
           handleChange={handleChange}
           type={"email"}
+          error={errors.email}
         />
         <PasswordFormInput
           id={"formPasswordInput"}
@@ -59,6 +62,7 @@ function MainRegisterForm() {
           value={form.password}
           placeholder={"Contraseña"}
           handleChange={handleChange}
+          error={errors.password}
         />
         <PasswordFormInput
           id={"formConfirmPasswordInput"}
@@ -66,18 +70,21 @@ function MainRegisterForm() {
           value={form.confirmPassword}
           placeholder={"Confirmar contraseña"}
           handleChange={handleChange}
+          error={errors.confirmPassword}
         />
         <DniFormInput
           id={"formDniInput"}
           name={"dni"}
           value={form.dni}
           handleChange={handleChange}
+          error={errors.dni}
         />
         <DateFormInput
           id={"formBirthDateInput"}
           name={"birthDate"}
           value={form.birthDate}
           handleChange={handleChange}
+          error={errors.birthDate}
         />
       </form>
     </section>

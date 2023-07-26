@@ -8,18 +8,24 @@ import React from "react";
  * @param {String} value Valor del input.
  * @param {String} placeholder Texto que va detrás del input.
  * @param {Function} handleChange Función que cambia el valor.
+ * @param {Object} error Errores del input, si tiene error se mostrará debajo del mismo.
  * @returns Retorna un input con las configuraciones seleccionadas.
  */
-function DniFormInput({ id, name, value, placeholder, handleChange }) {
+function DniFormInput({ id, name, value, placeholder, handleChange, error }) {
   return (
-    <div>
+    <div className="my-1.5">
       <span className="relative top-2 text-white">Sin separación</span>
-      <label htmlFor={id} className="flex align-middle my-1.5">
+      <label
+        htmlFor={id}
+        className={`flex align-middle my-1.5 rounded-xl ${
+          error && "border-alert"
+        }`}
+      >
         <div className="py-2 px-3 bg-blue-600 rounded-s-md">
           <span className="my-auto text-white">dni</span>
         </div>
         <input
-          type="number"
+          type="text"
           id={id}
           name={name}
           value={value}
@@ -30,6 +36,7 @@ function DniFormInput({ id, name, value, placeholder, handleChange }) {
           }}
         />
       </label>
+      {error && <p className="alert-text">{error.msg}</p>}
     </div>
   );
 }

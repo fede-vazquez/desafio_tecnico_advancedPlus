@@ -9,23 +9,35 @@ import React from "react";
  * @param {String} placeholder Texto que va detrás del input.
  * @param {Function} handleChange Función que cambia el valor.
  * @param {String} type Tipo de input, puede ser: text o email
+ * @param {Object} error Errores del input, si tiene error se mostrará debajo del mismo.
  * @returns Retorna un input con las configuraciones seleccionadas.
  */
-function FormInput({ id, name, value, placeholder, handleChange, type }) {
+function FormInput({
+  id,
+  name,
+  value,
+  placeholder,
+  handleChange,
+  type,
+  error,
+}) {
   return (
-    <label htmlFor={id}>
-      <input
-        id={id}
-        type={type}
-        name={name}
-        value={value}
-        className="form-input"
-        placeholder={placeholder}
-        onChange={(e) => {
-          handleChange(name, e.target.value);
-        }}
-      />
-    </label>
+    <div className="my-1.5">
+      <label htmlFor={id}>
+        <input
+          id={id}
+          type={type}
+          name={name}
+          value={value}
+          className={`form-input ${error && "border-alert"}`}
+          placeholder={placeholder}
+          onChange={(e) => {
+            handleChange(name, e.target.value);
+          }}
+        />
+      </label>
+      {error && <p className="alert-text">{error.msg}</p>}
+    </div>
   );
 }
 
