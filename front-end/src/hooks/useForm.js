@@ -57,8 +57,14 @@ function useForm(formData, validations) {
       let res = await fetch(urlToFetch, configToFetch);
       let json = await res.json();
       console.log(json);
+
+      // Si el status es 422, hubo error en las validaciones del servidor.
+      if (json.status == 422) {
+        setErrors(json.data);
+      }
     } catch (error) {
       console.log(error);
+      setErrors(errors);
     }
   }
 

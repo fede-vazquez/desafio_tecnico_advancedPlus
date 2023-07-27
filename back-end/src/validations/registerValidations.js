@@ -33,13 +33,13 @@ const validationsRegisterForm = [
     .withMessage("La contraseña debe tener entre 8 y 24 caracteres."),
 
   body("confirmPassword").custom((confirmPassword, { req }) => {
-    if (confirmPassword !== req.body.password) {
+    if (confirmPassword.length === 0 || confirmPassword !== req.body.password) {
       throw new Error("Las contraseñas no coinciden");
     }
     return true;
   }),
   body("birthDate")
-    .isEmpty()
+    .notEmpty()
     .withMessage("Debe agregar su fecha de nacimiento."),
 ];
 
