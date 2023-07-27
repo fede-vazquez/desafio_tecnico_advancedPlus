@@ -6,6 +6,7 @@ import DateFormInput from "./DateFormInput";
 import DniFormInput from "./DniFormInput";
 import { validationsRegister } from "../../validations/validationsRegister";
 import ImageInput from "./ImageFormInput";
+import ButtonPrimary from "../ButtonPrimary";
 
 const prevFormValues = {
   firstName: "",
@@ -28,7 +29,7 @@ function MainRegisterForm() {
   );
 
   return (
-    <section className=" bg-blue-500 p-3">
+    <section className="bg-blue-400 p-3">
       <form
         onSubmit={(e) => {
           handleSubmitForm(e, form);
@@ -97,7 +98,12 @@ function MainRegisterForm() {
           handleChange={handleChange}
           error={errors.birthDate}
         />
-        <button>enviar</button>
+        <ButtonPrimary
+          extraCss={"py-3 mt-4 block mx-auto px-5 shadow-md"}
+          fontSize={"text-xl"}
+        >
+          Enviar
+        </ButtonPrimary>
       </form>
     </section>
   );

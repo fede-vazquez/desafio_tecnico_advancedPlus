@@ -20,7 +20,7 @@ function DniFormInput({ id, name, value, placeholder, handleChange, error }) {
           error && "border-alert"
         }`}
       >
-        <div className="py-2 px-3 bg-blue-600 rounded-s-md">
+        <div className="py-2 px-3 bg-blue-500 rounded-s-md">
           <span className="my-auto text-white">dni</span>
         </div>
         <input
