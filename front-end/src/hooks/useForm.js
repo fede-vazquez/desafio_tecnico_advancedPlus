@@ -59,7 +59,7 @@ function useForm(formData, validations) {
       console.log(json);
 
       // Si el status es 422, hubo error en las validaciones del servidor.
-      if (json.status == 422) {
+      if (json.status === 422) {
         setErrors(json.data);
       }
     } catch (error) {
