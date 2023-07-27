@@ -26,16 +26,18 @@ function useForm(formData, validations) {
   }
 
   /**
-   * Función que verifica cada una de las validaciones.
+   * Función que verifica cada una de las validaciones, y enviar el formulario al servidor.
    * @param {Object} event Evento de submit del formulario.
    * @param {Object} form Formulario que se va a validar.
+   * @param {String} form Url que se hará el post.
+   * @param {Object} configToFetch Configuración para el post.
    */
-  function handleSubmitForm(event, form) {
+  async function handleSubmitForm(event, form, urlToFetch, configToFetch) {
     event.preventDefault();
 
     const nameInputsForm = Object.keys(form);
 
-    let errors = [];
+    let errors = {};
 
     nameInputsForm.forEach((nameInput) => {
       errors = validationsFormInputs(
@@ -46,10 +48,26 @@ function useForm(formData, validations) {
       );
     });
 
-    setErrors(errors);
+    if (Object.keys(errors).length > 0) {
+      setErrors(errors);
+      return;
+    }
+
+    try {
+      let res = await fetch(urlToFetch, configToFetch);
+      let json = await res.json();
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  return { form, errors, handleChange, handleSubmitForm };
+  return {
+    form,
+    errors,
+    handleChange,
+    handleSubmitForm,
+  };
 }
 
 export default useForm;
