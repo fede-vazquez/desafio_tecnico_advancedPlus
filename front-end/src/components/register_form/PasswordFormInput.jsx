@@ -3,10 +3,9 @@ import Icon from "../Icon";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 /**
- * Componente que devuelve un input de tipo texto.
+ * Componente que devuelve un input de tipo contraseña.
  * @param {String} id Id y for del input y label.
  * @param {String} name Nombre del input.
- * @param {String} value Valor del input.
  * @param {String} value Valor del input.
  * @param {String} placeholder Texto que va detrás del input.
  * @param {Function} handleChange Función que cambia el valor.

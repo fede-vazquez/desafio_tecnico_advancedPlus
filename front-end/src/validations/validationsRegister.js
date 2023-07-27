@@ -44,7 +44,7 @@ export const validationsRegister = [
   {
     name: "confirmPassword",
     validation: (value) => {
-      return value.trim().length < 0;
+      return value.trim().length > 0;
     },
     msg: "Debes confirmar la contraseña.",
   },

@@ -5,6 +5,7 @@ import PasswordFormInput from "./PasswordFormInput";
 import DateFormInput from "./DateFormInput";
 import DniFormInput from "./DniFormInput";
 import { validationsRegister } from "../../validations/validationsRegister";
+import ImageInput from "./ImageFormInput";
 
 const prevFormValues = {
   firstName: "",
@@ -33,6 +34,12 @@ function MainRegisterForm() {
           handleSubmitForm(e, form);
         }}
       >
+        <ImageInput
+          id={"formAvatarInput"}
+          name={"avatar"}
+          value={form.avatar}
+          handleChange={handleChange}
+        />
         <FormInput
           id={"formFirstNameInput"}
           name={"firstName"}
