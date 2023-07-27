@@ -59,8 +59,9 @@ module.exports = {
       id: uuidV4(),
       first_name: req.body.firstName,
       last_name: req.body.lastName,
-      email: req.body.email,
+      email: req.body.email.toLowerCase(),
       password: bcryptjs.hashSync(req.body.password, 8),
+      birth_date: req.body.birthDate,
       avatar: "img",
       dni: Number(req.body.dni),
     };
@@ -69,7 +70,6 @@ module.exports = {
       await db.Users.create(newUser);
       res.json({
         status: 200,
-        msg: "Usuario creado correctamente.",
       });
     } catch (error) {
       console.log(error);

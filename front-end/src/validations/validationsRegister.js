@@ -7,7 +7,7 @@ export const validationsRegister = [
     validation: (value) => {
       return value.trim().length >= 3;
     },
-    msg: "El nombre debe tener como mínimo 3 letras.",
+    msg: "El nombre debe tener mínimo 3 letras.",
   },
   {
     name: "lastName",
@@ -15,7 +15,7 @@ export const validationsRegister = [
       return value.trim().length >= 3;
     },
 
-    msg: "El apellido debe tener como mínimo 3 letras.",
+    msg: "El apellido debe tener mínimo 3 letras.",
   },
   {
     name: "email",
@@ -46,14 +46,7 @@ export const validationsRegister = [
     validation: (value) => {
       return value.trim().length > 0;
     },
-    msg: "Debes confirmar la contraseña.",
-  },
-  {
-    name: "birthDate",
-    validation: (value) => {
-      return value;
-    },
-    msg: "Debe agregar una fecha de nacimiento.",
+    msg: "Debe agregar la confirmación de  contraseña.",
   },
   {
     name: "birthDate",
