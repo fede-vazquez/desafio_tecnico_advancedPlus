@@ -44,7 +44,7 @@ export const validationsRegister = [
   {
     name: "confirmPassword",
     validation: (value) => {
-      const password = document.getElementById("formPasswordInput");
+      const password = document.getElementById("passwordRegisterForm");
       return value === password.value && value.trim().length > 0;
     },
     msg: "Las contraseñas no coinciden.",

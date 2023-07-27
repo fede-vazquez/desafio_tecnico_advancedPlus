@@ -1,9 +1,9 @@
 import React from "react";
-import FormInput from "./FormInput";
-import PasswordFormInput from "./PasswordFormInput";
-import DateFormInput from "./DateFormInput";
-import DniFormInput from "./DniFormInput";
-import ImageInput from "./ImageFormInput";
+import FormInput from "../form_inputs/FormInput";
+import PasswordFormInput from "../form_inputs/PasswordFormInput";
+import DateFormInput from "../form_inputs/DateFormInput";
+import DniFormInput from "../form_inputs/DniFormInput";
+import ImageInput from "../form_inputs/ImageFormInput";
 
 /**
  * Componente que contiene todos los inputs del formulario de registro.
@@ -12,13 +12,13 @@ function InputsFormRegister({ form, handleChange, errors }) {
   return (
     <>
       <ImageInput
-        id={"formAvatarInput"}
+        id={"avatarRegisterForm"}
         name={"avatar"}
         value={form.avatar}
         handleChange={handleChange}
       />
       <FormInput
-        id={"formFirstNameInput"}
+        id={"FirstNameRegisterForm"}
         name={"firstName"}
         value={form.firstName}
         placeholder={"Nombre"}
@@ -27,7 +27,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.firstName}
       />
       <FormInput
-        id={"formLastNameInput"}
+        id={"LastNameRegisterForm"}
         name={"lastName"}
         value={form.lastName}
         placeholder={"Apellido"}
@@ -36,7 +36,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.lastName}
       />
       <FormInput
-        id={"formEmailInput"}
+        id={"EmailRegisterForm"}
         name={"email"}
         value={form.email}
         placeholder={"Email"}
@@ -45,7 +45,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.email}
       />
       <PasswordFormInput
-        id={"formPasswordInput"}
+        id={"PasswordRegisterForm"}
         name={"password"}
         value={form.password}
         placeholder={"Contraseña"}
@@ -53,7 +53,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.password}
       />
       <PasswordFormInput
-        id={"formConfirmPasswordInput"}
+        id={"ConfirmPasswordRegisterForm"}
         name={"confirmPassword"}
         value={form.confirmPassword}
         placeholder={"Confirmar contraseña"}
@@ -61,14 +61,14 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.confirmPassword}
       />
       <DniFormInput
-        id={"formDniInput"}
+        id={"DniInput"}
         name={"dni"}
         value={form.dni}
         handleChange={handleChange}
         error={errors.dni}
       />
       <DateFormInput
-        id={"formBirthDateInput"}
+        id={"BirthDateRegisterForm"}
         name={"birthDate"}
         value={form.birthDate}
         handleChange={handleChange}

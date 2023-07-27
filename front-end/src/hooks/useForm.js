@@ -29,7 +29,7 @@ function useForm(formData, validations) {
    * Función que verifica cada una de las validaciones, y enviar el formulario al servidor.
    * @param {Object} event Evento de submit del formulario.
    * @param {Object} form Formulario que se va a validar.
-   * @param {String} form Url que se hará el post.
+   * @param {String} urlToFetch Url que se hará el post.
    * @param {Object} configToFetch Configuración para el post.
    */
   async function handleSubmitForm(event, form, urlToFetch, configToFetch) {
