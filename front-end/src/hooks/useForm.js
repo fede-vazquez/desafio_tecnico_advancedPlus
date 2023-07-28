@@ -48,19 +48,18 @@ function useForm(formData, validations) {
       );
     });
 
-    if (Object.keys(errors).length > 0) {
-      setErrors(errors);
-      return;
-    }
+    // if (Object.keys(errors).length > 0) {
+    //   setErrors(errors);
+    //   return;
+    // }
 
     try {
-      let res = await fetch(urlToFetch, configToFetch);
-      let json = await res.json();
-      console.log(json);
+      let response = await fetch(urlToFetch, configToFetch);
 
       // Si el status es 422, hubo error en las validaciones del servidor.
-      if (json.status === 422) {
-        setErrors(json.data);
+      if (response.status === 422) {
+        let dataJson = await response.json();
+        setErrors(dataJson.data);
       }
     } catch (error) {
       console.log(error);

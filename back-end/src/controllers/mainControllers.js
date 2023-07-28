@@ -1,6 +1,7 @@
 const db = require("../../database/models");
 const { v4: uuidV4 } = require("uuid");
 const bcryptjs = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   /**
@@ -15,10 +16,10 @@ module.exports = {
         limit: pageLimit,
         offset: (pageNumber - 1) * pageLimit,
       });
-      res.json({ status: 200, data: users });
+      res.status(200).json({ data: users });
     } catch (error) {
       console.log(error);
-      res.json({ status: 503, msg: "Ocurrió un error con el servidor" });
+      res.status(503).json({ msg: "Ocurrió un error con el servidor" });
     }
   },
 
@@ -29,10 +30,10 @@ module.exports = {
   getOneUser: async (req, res) => {
     try {
       const user = await db.Users.findByPk(req.params.id, { include: ["rol"] });
-      res.json({ status: 200, data: user });
+      res.status(200).json({ status: 200, data: user });
     } catch (error) {
       console.log(error);
-      res.json({ status: 503, msg: "Ocurrió un error con el servidor" });
+      res.status(503).json({ msg: "Ocurrió un error con el servidor" });
     }
   },
 
@@ -68,22 +69,38 @@ module.exports = {
 
     try {
       await db.Users.create(newUser);
-      res.json({
-        status: 200,
-      });
+      res.status(201);
     } catch (error) {
       console.log(error);
-      res.json({ status: 503, msg: "Ocurrió un error con el servidor" });
+      res.status(503).json({ msg: "Ocurrió un error con el servidor" });
     }
   },
 
+  /**
+   * Controlador para loguear a un usuario.
+   * @param {String} req.body.email Email del usuario que se va a buscar en la db.
+   */
   login: async (req, res) => {
     try {
       const user = await db.Users.findOne({ where: { email: req.body.email } });
-      res.json({ status: 200, data: user });
+      delete user.password;
+
+      // Código para que se cree y mande la JSON web token.
+      jwt.sign(
+        { user: { id: user.id, rol: user.rol } },
+        process.env.SECRET,
+        { algorithm: "HS256", expiresIn: "24h" },
+
+        (error, token) => {
+          res.status(200).json({ data: user, token });
+
+          console.log("token: " + token);
+          console.log("error: " + error);
+        }
+      );
     } catch (error) {
       console.log(error);
-      res.json({ status: 503, msg: "Ocurrió un error en el servidor" });
+      res.status(503).json({ msg: "Ocurrió un error en el servidor" });
     }
   },
 };

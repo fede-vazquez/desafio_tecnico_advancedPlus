@@ -5,8 +5,7 @@ const { validationResult } = require("express-validator");
 module.exports = (req, res, next) => {
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.json({
-      status: 422,
+    return res.status(422).json({
       data: errors.mapped(),
       msg: "Hay un error con las validaciones de los datos enviados.",
     });
