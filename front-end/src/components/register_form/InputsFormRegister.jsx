@@ -18,7 +18,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         handleChange={handleChange}
       />
       <FormInput
-        id={"FirstNameRegisterForm"}
+        id={"firstNameRegisterForm"}
         name={"firstName"}
         value={form.firstName}
         placeholder={"Nombre"}
@@ -27,7 +27,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.firstName}
       />
       <FormInput
-        id={"LastNameRegisterForm"}
+        id={"lastNameRegisterForm"}
         name={"lastName"}
         value={form.lastName}
         placeholder={"Apellido"}
@@ -36,7 +36,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.lastName}
       />
       <FormInput
-        id={"EmailRegisterForm"}
+        id={"emailRegisterForm"}
         name={"email"}
         value={form.email}
         placeholder={"Email"}
@@ -45,7 +45,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.email}
       />
       <PasswordFormInput
-        id={"PasswordRegisterForm"}
+        id={"passwordRegisterForm"}
         name={"password"}
         value={form.password}
         placeholder={"Contraseña"}
@@ -53,7 +53,7 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.password}
       />
       <PasswordFormInput
-        id={"ConfirmPasswordRegisterForm"}
+        id={"confirmPasswordRegisterForm"}
         name={"confirmPassword"}
         value={form.confirmPassword}
         placeholder={"Confirmar contraseña"}
@@ -61,14 +61,14 @@ function InputsFormRegister({ form, handleChange, errors }) {
         error={errors.confirmPassword}
       />
       <DniFormInput
-        id={"DniInput"}
+        id={"dniInput"}
         name={"dni"}
         value={form.dni}
         handleChange={handleChange}
         error={errors.dni}
       />
       <DateFormInput
-        id={"BirthDateRegisterForm"}
+        id={"birthDateRegisterForm"}
         name={"birthDate"}
         value={form.birthDate}
         handleChange={handleChange}

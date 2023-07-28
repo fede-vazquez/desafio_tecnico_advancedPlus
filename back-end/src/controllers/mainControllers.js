@@ -76,4 +76,14 @@ module.exports = {
       res.json({ status: 503, msg: "Ocurrió un error con el servidor" });
     }
   },
+
+  login: async (req, res) => {
+    try {
+      const user = await db.Users.findOne({ where: { email: req.body.email } });
+      res.json({ status: 200, data: user });
+    } catch (error) {
+      console.log(error);
+      res.json({ status: 503, msg: "Ocurrió un error en el servidor" });
+    }
+  },
 };

@@ -1,7 +1,7 @@
 /**
  * Array con validaciones, para que sea más simple validar cada una.
  */
-export const validationsLogin = [
+export const validationsLoginForm = [
   {
     name: "email",
     validation: (value) => {

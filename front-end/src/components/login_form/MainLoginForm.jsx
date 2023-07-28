@@ -3,7 +3,7 @@ import FormInput from "../form_inputs/FormInput";
 import useForm from "../../hooks/useForm";
 import ButtonPrimary from "../ButtonPrimary";
 import PasswordFormInput from "../form_inputs/PasswordFormInput";
-import { validationsLogin } from "../../validations/validationsLogin";
+import { validationsLoginForm } from "../../validations/validationsLogin";
 
 const prevFormData = { email: "", password: "" };
 
@@ -23,7 +23,7 @@ const configToSubmit = (data) => {
 function MainLoginForm() {
   const { form, errors, handleChange, handleSubmitForm } = useForm(
     prevFormData,
-    validationsLogin
+    validationsLoginForm
   );
 
   return (
