@@ -82,20 +82,20 @@ module.exports = {
    */
   login: async (req, res) => {
     try {
-      const user = await db.Users.findOne({ where: { email: req.body.email } });
+      const user = await db.Users.findOne({
+        where: { email: req.body.email },
+        include: ["rol"],
+      });
       delete user.password;
 
       // Código para que se cree y mande la JSON web token.
       jwt.sign(
-        { user: { id: user.id, rol: user.rol } },
+        { user: { id: user.id, rol: user.rol.name } },
         process.env.SECRET,
         { algorithm: "HS256", expiresIn: "24h" },
 
         (error, token) => {
           res.status(200).json({ data: user, token });
-
-          console.log("token: " + token);
-          console.log("error: " + error);
         }
       );
     } catch (error) {
