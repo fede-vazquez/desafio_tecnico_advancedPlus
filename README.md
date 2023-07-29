@@ -18,3 +18,7 @@ Prender Express en la carpeta "back-end" con "npm start" - Debe prenderse en el 
 1. **REACT_APP_SERVER_URL:** Url del servidor al que se le van a hacer las peticiones. "http://localhost:3001/", si se quiere usar otro hay que cambiarlo.
 
 2. **REACT_APP_DEFAULT_AVATAR_ROUTE:** Ruta a la imagen por defecto de los usuarios.
+
+### En el back-end tendremos 1 variable de entorno:
+
+1. **SECRET:** Clave secreta que tendrán los JSON web token.
