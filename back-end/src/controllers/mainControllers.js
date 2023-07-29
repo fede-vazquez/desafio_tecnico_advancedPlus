@@ -3,6 +3,9 @@ const { v4: uuidV4 } = require("uuid");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+/**
+ * Objeto que contiene todos los controladores para las rutas.
+ */
 module.exports = {
   /**
    * Controlador que devuelve todos los usuarios, paginados de 10 en 10, gracias a una query parameter.
@@ -40,7 +43,7 @@ module.exports = {
   /**
    * Controlador que registra un usuario.
    *
-   * Toma del body las propiedades: firstName, lastName, password, email y dni.
+   * Toma del body las propiedades: firstName, lastName, password, birth_date, email y dni.
    *
    * Y toma del FTP el nombre del archivo guardado del avatar.
    */
@@ -53,6 +56,7 @@ module.exports = {
      * @property {String} last_name Apellido del usuario.
      * @property {String} email Email del usuario.
      * @property {String} password Contraseña del usuario, con hash.
+     * @property {String} birth_date Fecha de nacimiento del usuario.
      * @property {String} avatar Ruta al avatar del usuario.
      * @property {Number} dni dni del usuario.
      */
@@ -77,7 +81,7 @@ module.exports = {
   },
 
   /**
-   * Controlador para loguear a un usuario.
+   * Controlador para que un usuario inicie sesión.
    * @param {String} req.body.email Email del usuario que se va a buscar en la db.
    */
   login: async (req, res) => {

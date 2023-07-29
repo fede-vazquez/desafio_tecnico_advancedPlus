@@ -1,5 +1,5 @@
 /**
- * Middleware que se encarga de verificar si existe un usuario conectado o no.
+ * Middleware que se encarga de verificar si existe un token o no.
  * El token debe venir en el header del request.
  */
 module.exports = (req, res, next) => {

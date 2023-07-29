@@ -3,7 +3,7 @@ const { Users } = require("../../database/models");
 const bcrypt = require("bcryptjs");
 
 /**
- * Array de validaciones con express-validator.
+ * Array de validaciones para el login con express-validator.
  */
 const validationsLoginForm = [
   body("email").custom(async (userEmail, { req }) => {

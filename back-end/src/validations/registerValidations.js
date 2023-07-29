@@ -1,7 +1,7 @@
 const { body } = require("express-validator");
 const { Users } = require("../../database/models");
 /**
- * Array de validaciones con express-validator.
+ * Array de validaciones para el registro con express-validator.
  */
 const validationsRegisterForm = [
   body("firstName")

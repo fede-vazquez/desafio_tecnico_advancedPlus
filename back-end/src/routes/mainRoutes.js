@@ -4,9 +4,21 @@ const mainControllers = require("../controllers/mainControllers");
 const errorMiddleware = require("../middlewares/errorMiddleware");
 const validationsRegisterForm = require("../validations/registerValidations");
 const validationsLoginForm = require("../validations/loginValidations");
+const userLoggedInMiddleware = require("../middlewares/userLoggedInMiddleware");
+const onlyAdminMiddleware = require("../middlewares/onlyAdminMiddleware");
 
-router.get("/users", mainControllers.getUsers);
-router.get("/users/detail/:id", mainControllers.getOneUser);
+router.get(
+  "/users",
+  userLoggedInMiddleware,
+  onlyAdminMiddleware,
+  mainControllers.getUsers
+);
+
+router.get(
+  "/users/detail/:id",
+  userLoggedInMiddleware,
+  mainControllers.getOneUser
+);
 
 router.post(
   "/users/register",
