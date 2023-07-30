@@ -4,6 +4,8 @@ import useForm from "../../hooks/useForm";
 import ButtonPrimary from "../ButtonPrimary";
 import PasswordFormInput from "../form_inputs/PasswordFormInput";
 import { validationsLoginForm } from "../../validations/validationsLogin";
+import { useUserContext } from "../../context/UserContext";
+import getFetch from "../../utils/getFetch";
 
 const prevFormData = { email: "", password: "" };
 
@@ -21,21 +23,38 @@ const configToSubmit = (data) => {
  * Componente de formulario de login.
  */
 function MainLoginForm() {
-  const { form, errors, handleChange, handleSubmitForm } = useForm(
+  const { updateUser } = useUserContext();
+
+  const { form, errors, handleChange, handleSubmitForm, loading } = useForm(
     prevFormData,
     validationsLoginForm
   );
 
+  async function submitForm(event) {
+    await handleSubmitForm(
+      event,
+      form,
+      process.env.REACT_APP_SERVER_URL + "/users/login",
+      configToSubmit(form)
+    );
+
+    // Si no existen errores, buscamos y guardamos el usuario con el token.
+    if (Object.keys(errors).length === 0) {
+      const fetchData = await getFetch(
+        process.env.REACT_APP_SERVER_URL + "/users/login",
+        configToSubmit(form)
+      );
+
+      updateUser({ user: fetchData.data, token: fetchData.token });
+    }
+  }
+
+  if (loading) return <p>Procesando datos...</p>;
   return (
     <section className="bg-blue-400 p-3">
       <form
         onSubmit={(event) => {
-          handleSubmitForm(
-            event,
-            form,
-            process.env.REACT_APP_SERVER_URL + "/users/login",
-            configToSubmit(form)
-          );
+          submitForm(event);
         }}
       >
         <FormInput

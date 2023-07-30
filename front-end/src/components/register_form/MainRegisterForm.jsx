@@ -31,10 +31,12 @@ const configToSubmit = (data) => {
  * @returns Retorna el formulario.
  */
 function MainRegisterForm() {
-  const { form, handleChange, errors, handleSubmitForm } = useForm(
+  const { form, handleChange, errors, handleSubmitForm, loading } = useForm(
     prevFormValues,
     validationsRegister
   );
+
+  if (loading) return <p>Procesando datos...</p>;
 
   return (
     <section className="bg-blue-400 p-3">
