@@ -4,10 +4,11 @@ import React, { createContext, useState, useContext } from "react";
 const UserContext = createContext();
 
 /**
- * Componente que contiene el contexto de usuario.
+ * Componente que contiene el contexto de usuario y token.
  */
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(false);
+  const [token, setToken] = useState(false);
 
   /**
    * Función para actualizar a un usuario.
@@ -19,8 +20,18 @@ const UserProvider = ({ children }) => {
     setUser(newUser);
   };
 
+  /**
+   * Función para actualizar a un token.
+   * @param {String|boolean} newToken Objeto que contiene al usuario.
+   *
+   * En caso de que se quiera eliminar el token, le pasamos "false".
+   */
+  const updateToken = (newToken) => {
+    setToken(newToken);
+  };
+
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, updateUser, token, updateToken }}>
       {children}
     </UserContext.Provider>
   );

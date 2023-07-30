@@ -48,7 +48,6 @@ function MainRegisterForm() {
 
     try {
       // Si no existen errores, intentamos mandar el usuario.
-      console.log("try");
       const fetchData = await formFetch(
         process.env.REACT_APP_SERVER_URL + "/users/register",
         configToSubmit(form)
