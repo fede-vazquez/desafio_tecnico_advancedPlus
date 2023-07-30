@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import formFetch from "../../utils/formFetch";
 import UserItem from "./UserItem";
+import SearchButtons from "./SearchButtons";
 
 const fetchConfig = (token) => {
   return {
@@ -49,11 +50,18 @@ function UsersList({ userToken }) {
       {users ? (
         <ul>
           {users.map((user) => {
-            return <UserItem user={user} />;
+            return <UserItem user={user} key={user.email} />;
           })}
         </ul>
       ) : (
         <p>Error de autorización.</p>
+      )}
+      {users && (
+        <SearchButtons
+          pageNumber={pageNumber}
+          setPageNumber={setPageNumber}
+          usersLength={users.length}
+        />
       )}
     </section>
   );
