@@ -5,17 +5,12 @@
  * @returns Retorna el valor de la petición.
  */
 module.exports = async (url, config) => {
-  try {
-    const response = await fetch(url, config);
+  const response = await fetch(url, config);
+  const result = await response.json();
 
-    if (!response.ok) {
-      return false;
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
+  if (response.status === 422) {
+    return { errors: result.data };
   }
+
+  return result;
 };
