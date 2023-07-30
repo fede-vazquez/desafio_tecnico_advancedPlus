@@ -21,7 +21,7 @@ const configToSubmit = (data) => {
  * Componente de formulario de login.
  */
 function MainLoginForm() {
-  const { updateUser } = useUserContext();
+  const { updateUser, updateToken } = useUserContext();
   const [loading, setLoading] = useState(false);
 
   const { form, errors, setErrors, handleChange, validateSubmit } = useForm(
@@ -47,15 +47,15 @@ function MainLoginForm() {
       );
 
       setErrors({});
-      updateUser(fetchData);
+      updateUser(fetchData.result.data);
+      updateToken(fetchData.result.token);
     } catch (error) {
       // Si existen errores en el fetch, los agregamos en los errores.
-      if (error?.formErrors) {
-        setErrors((prevErrors) => {
-          return { ...prevErrors, ...error.formErrors };
-        });
-      }
+      setErrors((prevErrors) => {
+        return { ...prevErrors, ...error };
+      });
       updateUser(false);
+      updateToken(false);
     }
     setLoading(false);
   }
