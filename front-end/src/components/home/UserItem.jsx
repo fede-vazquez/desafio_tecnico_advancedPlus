@@ -1,6 +1,10 @@
 import React from "react";
 import ModifyUsersButtons from "./ModifyUsersButtons";
 
+/**
+ * Item de usuario dentro de la lista de UserItem
+ * @param {Object} user Datos del usuario.
+ */
 function UserItem({ user }) {
   return (
     <li className="flex justify-between align-middle w-full py-3.5 px-2 border-y-2 border-blue-200">
@@ -11,10 +15,10 @@ function UserItem({ user }) {
           alt={`avatar de ${user.first_name} ${user.last_name}`}
         />
         <div className="flex flex-col grow my-auto">
-          <p className="text-sm font-semibold leading-6 text-gray-900">
+          <p className="text-sm font-bold leading-6 text-gray-900">
             {user.first_name} {user.last_name}
           </p>
-          <p className="mt-1 truncate text-xs leading-5 text-white">
+          <p className="mt-1 truncate text-xs font-semibold leading-5 text-white">
             {user.email}
           </p>
         </div>
