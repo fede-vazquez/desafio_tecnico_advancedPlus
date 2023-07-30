@@ -5,12 +5,11 @@ import { validationsFormInputs } from "../validations/validation";
  * Hook personalizado para trabajar con el formulario.
  * @param {Object} formData Datos iniciales del formulario.
  * @param {Array<Object>} validations Array con validaciones.
- * @returns Devuelve: los datos del formulario "form", los errores del formulario "errors", función para controlar los cambios "handleChange", función para controlar el submit "handleSubmitForm" y si la petición esta cargando o no "loading".
+ * @returns Devuelve: los datos del formulario "form", los errores del formulario "errors", función para controlar los cambios "handleChange" y función para controlar el submit "validateSubmit".
  */
 function useForm(formData, validations) {
   const [form, setForm] = useState(formData);
   const [errors, setErrors] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   /**
    * Función para controlar cuando se modifica un input.
@@ -21,20 +20,18 @@ function useForm(formData, validations) {
     setForm((prevForm) => {
       return { ...prevForm, [nameInput]: value };
     });
-    setErrors((prevError) => {
-      return validationsFormInputs(nameInput, value, validations, prevError);
+    setErrors((prevErrors) => {
+      return validationsFormInputs(nameInput, value, validations, prevErrors);
     });
   }
 
   /**
-   * Función que verifica cada una de las validaciones, y enviar el formulario al servidor.
+   * Función que verifica cada una de las validaciones del front del formulario.
    * @param {Object} event Evento de submit del formulario.
    * @param {Object} form Formulario que se va a validar.
-   * @param {String} urlToFetch Url que se hará el post.
-   * @param {Object} configToFetch Configuración para el post.
-   * @returns Retorna true si el fetch es correcto, y false si es incorrecto.
+   * @returns Retorna true si se validan correctamente todos los campos del formulario.
    */
-  async function handleSubmitForm(event, form, urlToFetch, configToFetch) {
+  function validateSubmit(event, form) {
     event.preventDefault();
 
     const nameInputsForm = Object.keys(form);
@@ -51,35 +48,20 @@ function useForm(formData, validations) {
     });
 
     if (Object.keys(errors).length > 0) {
-      setErrors(errors);
-      return;
+      setErrors((prevErrors) => {
+        return { ...prevErrors, ...errors };
+      });
+      return false;
     }
-
-    try {
-      setLoading(true);
-      let response = await fetch(urlToFetch, configToFetch);
-
-      // Si el status es 422, hubo error en las validaciones del servidor.
-      if (response.status === 422) {
-        let dataJson = await response.json();
-        setErrors(dataJson.data);
-      }
-      setLoading(false);
-
-      return true;
-    } catch (error) {
-      console.log(error);
-      setErrors(errors);
-      setLoading(false);
-    }
+    return true;
   }
 
   return {
     form,
     errors,
+    setErrors,
     handleChange,
-    handleSubmitForm,
-    loading,
+    validateSubmit,
   };
 }
 
