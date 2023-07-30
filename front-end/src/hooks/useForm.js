@@ -5,11 +5,12 @@ import { validationsFormInputs } from "../validations/validation";
  * Hook personalizado para trabajar con el formulario.
  * @param {Object} formData Datos iniciales del formulario.
  * @param {Array<Object>} validations Array con validaciones.
- * @returns {Object} Devuelve: los datos del formulario "form", los errores del formulario "errors", función para controlar los cambios "handleChange" y función para controlar el submit "handleSubmitForm".
+ * @returns Devuelve: los datos del formulario "form", los errores del formulario "errors", función para controlar los cambios "handleChange", función para controlar el submit "handleSubmitForm" y si la petición esta cargando o no "loading".
  */
 function useForm(formData, validations) {
   const [form, setForm] = useState(formData);
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   /**
    * Función para controlar cuando se modifica un input.
@@ -31,6 +32,7 @@ function useForm(formData, validations) {
    * @param {Object} form Formulario que se va a validar.
    * @param {String} urlToFetch Url que se hará el post.
    * @param {Object} configToFetch Configuración para el post.
+   * @returns Retorna true si el fetch es correcto, y false si es incorrecto.
    */
   async function handleSubmitForm(event, form, urlToFetch, configToFetch) {
     event.preventDefault();
@@ -48,12 +50,13 @@ function useForm(formData, validations) {
       );
     });
 
-    // if (Object.keys(errors).length > 0) {
-    //   setErrors(errors);
-    //   return;
-    // }
+    if (Object.keys(errors).length > 0) {
+      setErrors(errors);
+      return;
+    }
 
     try {
+      setLoading(true);
       let response = await fetch(urlToFetch, configToFetch);
 
       // Si el status es 422, hubo error en las validaciones del servidor.
@@ -61,9 +64,13 @@ function useForm(formData, validations) {
         let dataJson = await response.json();
         setErrors(dataJson.data);
       }
+      setLoading(false);
+
+      return true;
     } catch (error) {
       console.log(error);
       setErrors(errors);
+      setLoading(false);
     }
   }
 
@@ -72,6 +79,7 @@ function useForm(formData, validations) {
     errors,
     handleChange,
     handleSubmitForm,
+    loading,
   };
 }
 
