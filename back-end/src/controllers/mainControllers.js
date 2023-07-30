@@ -73,7 +73,7 @@ module.exports = {
 
     try {
       await db.Users.create(newUser);
-      res.status(201);
+      res.status(201).json({ msg: "Usuario creado correctamente." });
     } catch (error) {
       console.log(error);
       res.status(503).json({ msg: "Ocurrió un error con el servidor" });

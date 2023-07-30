@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import useForm from "../../hooks/useForm";
 
 import { validationsRegister } from "../../validations/validationsRegister";
 import ButtonPrimary from "../ButtonPrimary";
 import InputsFormRegister from "./InputsFormRegister";
+import formFetch from "../../utils/formFetch";
 
 const prevFormValues = {
   firstName: "",
@@ -21,7 +22,6 @@ const configToSubmit = (data) => {
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-cache",
     body: JSON.stringify(data),
   };
 };
@@ -31,23 +31,48 @@ const configToSubmit = (data) => {
  * @returns Retorna el formulario.
  */
 function MainRegisterForm() {
-  const { form, handleChange, errors, handleSubmitForm, loading } = useForm(
+  const { form, handleChange, errors, setErrors, validateSubmit } = useForm(
     prevFormValues,
     validationsRegister
   );
+  const [loading, setLoading] = useState(false);
+
+  async function submitForm(event, form) {
+    setLoading(true);
+    const validate = validateSubmit(event, form);
+
+    if (!validate) {
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Si no existen errores, intentamos mandar el usuario.
+      console.log("try");
+      const fetchData = await formFetch(
+        process.env.REACT_APP_SERVER_URL + "/users/register",
+        configToSubmit(form)
+      );
+
+      if (fetchData.status === 201) {
+        console.log("Usuario creado correctamente.");
+      }
+    } catch (error) {
+      // Si existen errores en el fetch, los agregamos en los errores.
+      setErrors((prevErrors) => {
+        return { ...prevErrors, ...error };
+      });
+    }
+    setLoading(false);
+  }
 
   if (loading) return <p>Procesando datos...</p>;
 
   return (
     <section className="bg-blue-400 p-3">
       <form
-        onSubmit={(e) => {
-          handleSubmitForm(
-            e,
-            form,
-            process.env.REACT_APP_SERVER_URL + "/users/register",
-            configToSubmit(form)
-          );
+        onSubmit={(event) => {
+          submitForm(event, form);
         }}
       >
         <InputsFormRegister
