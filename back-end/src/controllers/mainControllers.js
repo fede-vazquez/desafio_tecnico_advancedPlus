@@ -33,7 +33,7 @@ module.exports = {
   getOneUser: async (req, res) => {
     try {
       const user = await db.Users.findByPk(req.params.id, { include: ["rol"] });
-      res.status(200).json({ status: 200, data: user });
+      res.status(200).json({ data: user });
     } catch (error) {
       console.log(error);
       res.status(503).json({ msg: "Ocurrió un error con el servidor" });
@@ -116,7 +116,7 @@ module.exports = {
    */
   editUser: async (req, res) => {
     const formUserData = {
-      id: req.body.id,
+      id: req.token.user.id,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email.toLowerCase(),
@@ -125,8 +125,9 @@ module.exports = {
       avatar: req.body.avatar,
       dni: req.body.dni,
     };
+
     try {
-      const userToUpdate = await db.Users.findByPk(req.body.id, {
+      const userToUpdate = await db.Users.findByPk(req.token.user.id, {
         include: ["rol"],
       });
 
@@ -134,7 +135,7 @@ module.exports = {
 
       await db.Users.update(newUserData, {
         returning: true,
-        where: { id: req.body.id },
+        where: { id: req.token.user.id },
       });
       // Código para que se cree y mande la JSON web token.
       jwt.sign(
@@ -144,6 +145,41 @@ module.exports = {
 
         (error, token) => {
           res.status(200).json({ data: newUserData, token });
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      res.status(503).json({ msg: "Ocurrió un error en el servidor" });
+    }
+  },
+  adminEditUser: async (req, res) => {
+    const formUserData = {
+      id: req.params.id,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email.toLowerCase(),
+      password: req.body.password,
+      birth_date: req.body.birth_date,
+      avatar: req.body.avatar,
+      dni: req.body.dni,
+    };
+    try {
+      const userToUpdate = await db.Users.findByPk(req.params.id, {
+        include: ["rol"],
+      });
+      const newUserData = { ...userToUpdate.dataValues, ...formUserData };
+      await db.Users.update(newUserData, {
+        returning: true,
+        where: { id: req.params.id },
+      });
+      // Código para que se cree y mande la JSON web token.
+      jwt.sign(
+        { user: { id: req.body.id, rol: req.body.rol.name } },
+        process.env.SECRET,
+        { algorithm: "HS256", expiresIn: "24h" },
+
+        (error, token) => {
+          res.status(200).json({ msg: "Usuario actualizado" });
         }
       );
     } catch (error) {

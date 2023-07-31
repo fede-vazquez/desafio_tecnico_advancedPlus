@@ -18,6 +18,7 @@ router.get(
 router.get(
   "/users/detail/:id",
   userLoggedInMiddleware,
+  onlyAdminMiddleware,
   mainControllers.getOneUser
 );
 
@@ -37,9 +38,19 @@ router.post(
 
 router.put(
   "/users/edit",
+  userLoggedInMiddleware,
   validationsEditForm,
   errorMiddleware,
   mainControllers.editUser
+);
+
+router.put(
+  "/admin/users/edit/:id",
+  userLoggedInMiddleware,
+  onlyAdminMiddleware,
+  validationsEditForm,
+  errorMiddleware,
+  mainControllers.adminEditUser
 );
 
 module.exports = router;
