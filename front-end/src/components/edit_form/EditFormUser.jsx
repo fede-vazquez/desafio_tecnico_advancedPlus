@@ -5,17 +5,18 @@ import { validationsEdit } from "../../validations/validationsEdit";
 import EditContentForm from "./EditContentForm";
 import formFetch from "../../utils/formFetch";
 
-const configToSubmit = (data) => {
+const configToSubmit = (data, userToken) => {
   return {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `bearer ${userToken}`,
     },
     body: JSON.stringify(data),
   };
 };
 
-function MainProfile() {
+function EditFormUser() {
   const { user, token, updateUser, updateToken } = useUserContext();
 
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,7 @@ function MainProfile() {
       // Si no existen errores, intentamos editar al usuario.
       const fetchData = await formFetch(
         process.env.REACT_APP_SERVER_URL + "/users/edit",
-        configToSubmit(form)
+        configToSubmit(form, token)
       );
       console.log(fetchData);
       setErrors({});
@@ -71,4 +72,4 @@ function MainProfile() {
   );
 }
 
-export default MainProfile;
+export default EditFormUser;

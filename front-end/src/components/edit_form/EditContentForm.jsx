@@ -1,7 +1,6 @@
 import React from "react";
 import FormInput from "../form_inputs/FormInput";
 import DateFormInput from "../form_inputs/DateFormInput";
-import DniFormInput from "../form_inputs/DniFormInput";
 import ImageInput from "../form_inputs/ImageFormInput";
 import ButtonPrimary from "../ButtonPrimary";
 
