@@ -5,9 +5,13 @@ import ModifyUsersButtons from "./ModifyUsersButtons";
  * Item de usuario dentro de la lista de UserItem
  * @param {Object} user Datos del usuario.
  */
-function UserItem({ user }) {
+function UserItem({ user, setSwitchActiveUser }) {
   return (
-    <li className="flex justify-between align-middle w-full py-3.5 px-2 border-y-2 border-blue-200">
+    <li
+      className={`flex justify-between align-middle w-full py-3.5 px-2 border-y-2 border-blue-200 ${
+        user.active ? "bg-blue-500" : "bg-gray-400"
+      }`}
+    >
       <div className="flex gap-x-2 w-full">
         <img
           className="h-16 w-16 my-auto rounded-md bg-gray-50"
@@ -22,7 +26,10 @@ function UserItem({ user }) {
             {user.email}
           </p>
         </div>
-        <ModifyUsersButtons userToModify={user} />
+        <ModifyUsersButtons
+          userToModify={user}
+          setSwitchActiveUser={setSwitchActiveUser}
+        />
       </div>
     </li>
   );

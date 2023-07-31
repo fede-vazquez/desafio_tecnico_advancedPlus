@@ -37,6 +37,8 @@ function AdminEditFormUser() {
         const user = await response.json();
         setUserToEdit(user.data);
       } catch (error) {
+        console.log(error);
+
         setUserToEdit(false);
       }
       setLoading(false);

@@ -22,6 +22,7 @@ function UsersList({ userToken }) {
   const [pageNumber, setPageNumber] = useState(0);
   const [users, setUsers] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [switchActiveUser, setSwitchActiveUser] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -40,7 +41,7 @@ function UsersList({ userToken }) {
       fetchConfig(userToken)
     );
     setLoading(false);
-  }, [pageNumber, userToken]);
+  }, [pageNumber, userToken, switchActiveUser]);
 
   if (loading) return <p>Cargando usuarios...</p>;
   return (
@@ -49,7 +50,13 @@ function UsersList({ userToken }) {
         <>
           <ul>
             {users.map((user) => {
-              return <UserItem user={user} key={user.email} />;
+              return (
+                <UserItem
+                  user={user}
+                  key={user.email}
+                  setSwitchActiveUser={setSwitchActiveUser}
+                />
+              );
             })}
           </ul>
           <SearchButtons

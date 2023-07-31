@@ -54,6 +54,7 @@ function EditFormUser() {
     setLoading(false);
   }
 
+  if (loading) return <p>Cargando...</p>;
   return (
     <section className="pt-4 px-2">
       <form
