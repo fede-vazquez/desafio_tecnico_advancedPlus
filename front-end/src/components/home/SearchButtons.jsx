@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function SearchButtons({ pageNumber, setPageNumber, usersLength }) {
-  const isFirstPage = pageNumber === 0;
+  const isFirstPage = pageNumber === 1;
   const isLastPage = usersLength < 10;
 
   function nextPage() {
@@ -16,7 +16,7 @@ function SearchButtons({ pageNumber, setPageNumber, usersLength }) {
   }
 
   function prevPage() {
-    if (pageNumber > 0) {
+    if (pageNumber > 1) {
       setPageNumber(pageNumber - 1);
     }
   }
@@ -37,7 +37,7 @@ function SearchButtons({ pageNumber, setPageNumber, usersLength }) {
 
       {/* <!-- Número de página --> */}
       <p className="text-md font-semibold text-gray-800 mx-2">
-        Página {pageNumber + 1}
+        Página {pageNumber}
       </p>
 
       {/* <!-- Flecha derecha --> */}

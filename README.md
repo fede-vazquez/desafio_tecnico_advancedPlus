@@ -22,3 +22,17 @@ Prender Express en la carpeta "back-end" con "npm start" - Debe prenderse en el 
 ### En el back-end tendremos 1 variable de entorno:
 
 1. **SECRET:** Clave secreta que tendrán los JSON web token.
+
+## Base de datos
+
+El código SQL para iniciar la db esta en el archivo db_sql dentro de la carpeta database en el back-end
+
+#### Usuario admin
+
+**Email:** admin@admin.com
+**Contraseña:** adminContraseña
+
+#### Usuario normal
+
+**Email:** user@user.com
+**Contraseña:** userContraseña

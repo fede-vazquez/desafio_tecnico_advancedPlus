@@ -19,7 +19,7 @@ const fetchConfig = (token) => {
  * @returns Retorna una lista con los usuarios de la db si es que la validación esta correcta.
  */
 function UsersList({ userToken }) {
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
   const [users, setUsers] = useState(false);
   const [loading, setLoading] = useState(false);
   const [switchActiveUser, setSwitchActiveUser] = useState(false);
