@@ -28,7 +28,6 @@ function UsersList({ userToken }) {
     async function fetchUsers(urlToFetch, configToFetch) {
       const response = await formFetch(urlToFetch, configToFetch);
 
-      console.log(response);
       if (response.status !== 200) {
         return false;
       }
@@ -44,24 +43,21 @@ function UsersList({ userToken }) {
   }, [pageNumber, userToken]);
 
   if (loading) return <p>Cargando usuarios...</p>;
-
   return (
     <section className="bg-blue-400 text-white">
-      {users ? (
-        <ul>
-          {users.map((user) => {
-            return <UserItem user={user} key={user.email} />;
-          })}
-        </ul>
-      ) : (
-        <p>Error de autorización.</p>
-      )}
       {users && (
-        <SearchButtons
-          pageNumber={pageNumber}
-          setPageNumber={setPageNumber}
-          usersLength={users.length}
-        />
+        <>
+          <ul>
+            {users.map((user) => {
+              return <UserItem user={user} key={user.email} />;
+            })}
+          </ul>
+          <SearchButtons
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+            usersLength={users.length}
+          />
+        </>
       )}
     </section>
   );
