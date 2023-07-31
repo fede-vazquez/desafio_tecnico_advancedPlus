@@ -13,6 +13,9 @@ const configToSubmit = (token) => {
   };
 };
 
+/**
+ * Componente que contiene la lógica para cargar a un usuario específico y el formulario de edición del mismo.
+ */
 function AdminEditFormUser() {
   const [loading, setLoading] = useState(false);
   const { token } = useUserContext();
@@ -27,6 +30,7 @@ function AdminEditFormUser() {
         const response = await fetch(urlToFetch, configToSubmit(sessionToken));
 
         if (response.status !== 200) {
+          setLoading(false);
           setUserToEdit(false);
           return;
         }

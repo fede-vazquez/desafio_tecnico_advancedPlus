@@ -3,17 +3,6 @@ import Icon from "./Icon";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import LinksList from "./LinksList";
 
-const links = [
-  {
-    link: "/users/profile",
-    text: "Ver perfil",
-  },
-  {
-    link: "/users/logout",
-    text: "Cerrar sesión",
-  },
-];
-
 function DropDownUserMenu({ userName }) {
   const [active, setActive] = useState(false);
 
@@ -21,6 +10,7 @@ function DropDownUserMenu({ userName }) {
     // Modifica el "active" a lo contrario del valor actual
     setActive(!active);
   }
+
   return (
     <div
       className="bg-white hover:bg-stone-200 rounded-xl cursor-pointer"
@@ -40,7 +30,7 @@ function DropDownUserMenu({ userName }) {
         <p className="text-sm ps-1 pe-2">{userName}</p>
         <Icon icon={faChevronDown} css={"pe-2 h-4"} />
       </figure>
-      {active && <LinksList arrayLinks={links} />}
+      {active && <LinksList />}
     </div>
   );
 }
