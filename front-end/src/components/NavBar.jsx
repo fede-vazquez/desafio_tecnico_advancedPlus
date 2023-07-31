@@ -16,7 +16,11 @@ function NavBar() {
           className="h-10 w-auto bg-white rounded-lg px-2"
         />
       </Link>
-      {user ? <DropDownUserMenu /> : <LoginButtons />}
+      {user ? (
+        <DropDownUserMenu userName={user.first_name + " " + user.last_name} />
+      ) : (
+        <LoginButtons />
+      )}
     </nav>
   );
 }

@@ -3,9 +3,20 @@ import { useUserContext } from "../../context/UserContext";
 import useForm from "../../hooks/useForm";
 import { validationsEdit } from "../../validations/validationsEdit";
 import EditContentForm from "./EditContentForm";
+import formFetch from "../../utils/formFetch";
+
+const configToSubmit = (data) => {
+  return {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+};
 
 function MainProfile() {
-  const { user } = useUserContext();
+  const { user, token, updateUser, updateToken } = useUserContext();
 
   const [loading, setLoading] = useState(false);
 
@@ -14,8 +25,32 @@ function MainProfile() {
     validationsEdit
   );
   async function submitForm(event) {
-    event.preventDefault();
-    console.log(form);
+    setLoading(true);
+    const validate = validateSubmit(event, form);
+
+    if (!validate) {
+      setLoading(false);
+      return;
+    }
+
+    try {
+      // Si no existen errores, intentamos editar al usuario.
+      const fetchData = await formFetch(
+        process.env.REACT_APP_SERVER_URL + "/users/edit",
+        configToSubmit(form)
+      );
+      console.log(fetchData);
+      setErrors({});
+      updateUser(fetchData.result.data);
+      updateToken(fetchData.result.token);
+    } catch (error) {
+      // Si existen errores en el fetch, los agregamos en los errores.
+      setErrors((prevErrors) => {
+        return { ...prevErrors, ...error };
+      });
+    }
+
+    setLoading(false);
   }
 
   return (

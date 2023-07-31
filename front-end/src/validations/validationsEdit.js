@@ -26,7 +26,7 @@ export const validationsEdit = [
     msg: "Debe agregar un email valido",
   },
   {
-    name: "birthDate",
+    name: "birth_ate",
     validation: (value) => {
       return value;
     },

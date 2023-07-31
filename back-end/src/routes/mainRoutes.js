@@ -6,6 +6,7 @@ const validationsRegisterForm = require("../validations/registerValidations");
 const validationsLoginForm = require("../validations/loginValidations");
 const userLoggedInMiddleware = require("../middlewares/userLoggedInMiddleware");
 const onlyAdminMiddleware = require("../middlewares/onlyAdminMiddleware");
+const validationsEditForm = require("../validations/editValidations");
 
 router.get(
   "/users",
@@ -32,6 +33,13 @@ router.post(
   validationsLoginForm,
   errorMiddleware,
   mainControllers.login
+);
+
+router.put(
+  "/users/edit",
+  validationsEditForm,
+  errorMiddleware,
+  mainControllers.editUser
 );
 
 module.exports = router;

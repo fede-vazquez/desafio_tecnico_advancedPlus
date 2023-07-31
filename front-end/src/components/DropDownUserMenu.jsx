@@ -14,7 +14,7 @@ const links = [
   },
 ];
 
-function DropDownUserMenu() {
+function DropDownUserMenu({ userName }) {
   const [active, setActive] = useState(false);
 
   function switchActive() {
@@ -37,7 +37,7 @@ function DropDownUserMenu() {
           alt="avatar de usuario"
           className=" h-10 rounded-full bg-stone-200 p-0.5 border-stone-400 border-2"
         />
-        <p className="text-sm ps-1 pe-2">Federico Vazquez</p>
+        <p className="text-sm ps-1 pe-2">{userName}</p>
         <Icon icon={faChevronDown} css={"pe-2 h-4"} />
       </figure>
       {active && <LinksList arrayLinks={links} />}

@@ -107,4 +107,48 @@ module.exports = {
       res.status(503).json({ msg: "Ocurrió un error en el servidor" });
     }
   },
+  /**
+   * Controlador que edita y devuelve un usuario junto a un nuevo token.
+   *
+   * Toma del body las propiedades: first_name, last_name, birth_date y email.
+   *
+   * Y toma del FTP el nombre del archivo guardado del avatar.
+   */
+  editUser: async (req, res) => {
+    const formUserData = {
+      id: req.body.id,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email.toLowerCase(),
+      password: req.body.password,
+      birth_date: req.body.birth_date,
+      avatar: req.body.avatar,
+      dni: req.body.dni,
+    };
+    try {
+      const userToUpdate = await db.Users.findByPk(req.body.id, {
+        include: ["rol"],
+      });
+
+      const newUserData = { ...userToUpdate.dataValues, ...formUserData };
+
+      await db.Users.update(newUserData, {
+        returning: true,
+        where: { id: req.body.id },
+      });
+      // Código para que se cree y mande la JSON web token.
+      jwt.sign(
+        { user: { id: req.body.id, rol: req.body.rol.name } },
+        process.env.SECRET,
+        { algorithm: "HS256", expiresIn: "24h" },
+
+        (error, token) => {
+          res.status(200).json({ data: newUserData, token });
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      res.status(503).json({ msg: "Ocurrió un error en el servidor" });
+    }
+  },
 };
