@@ -43,7 +43,7 @@ function AdminEditFormUser() {
     }
 
     fetchUser(
-      process.env.REACT_APP_SERVER_URL + "/users/detail/" + userToEditId,
+      process.env.REACT_APP_SERVER_URL + "/admin/users/detail/" + userToEditId,
       token
     );
   }, [userToEditId, token]);

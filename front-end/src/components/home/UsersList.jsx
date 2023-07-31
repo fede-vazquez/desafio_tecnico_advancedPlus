@@ -36,7 +36,7 @@ function UsersList({ userToken }) {
     }
 
     fetchUsers(
-      process.env.REACT_APP_SERVER_URL + "/users?p=" + pageNumber,
+      process.env.REACT_APP_SERVER_URL + "/admin/users?p=" + pageNumber,
       fetchConfig(userToken)
     );
     setLoading(false);
