@@ -29,4 +29,17 @@ router.put(
   mainControllers.adminEditUser
 );
 
+router.put(
+  "/users/desactive/:id",
+  userLoggedInMiddleware,
+  onlyAdminMiddleware,
+  mainControllers.desactiveUser
+);
+router.put(
+  "/users/active/:id",
+  userLoggedInMiddleware,
+  onlyAdminMiddleware,
+  mainControllers.activeUser
+);
+
 module.exports = router;

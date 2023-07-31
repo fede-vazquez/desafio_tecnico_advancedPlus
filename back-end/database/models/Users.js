@@ -38,6 +38,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.STRING,
       },
+      active: {
+        allowNull: true,
+        type: DataTypes.INTEGER(1),
+      },
     },
     {
       tableName: "users",

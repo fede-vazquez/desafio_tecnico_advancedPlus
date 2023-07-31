@@ -74,4 +74,37 @@ module.exports = {
       res.status(503).json({ msg: "Ocurrió un error en el servidor" });
     }
   },
+
+  /**
+   * Controlador para desactivar a un usuario.
+   * @param {String} req.params.id Id del usuario que se quiere desactivar.
+   */
+  desactiveUser: async (req, res) => {
+    try {
+      const userToDesactive = await db.Users.findByPk(req.params.id);
+      const userDesactive = { ...userToDesactive.dataValues, active: 0 };
+      console.log(userDesactive);
+
+      await db.Users.update(userDesactive, { where: { id: req.params.id } });
+      res.status(200).json({ msg: "Usuario desactivado." });
+    } catch (error) {
+      res.status(503).json({ msg: "Ocurrió un error en el servidor" });
+    }
+  },
+
+  /**
+   * Controlador para activar a un usuario.
+   * @param {String} req.params.id Id del usuario que se quiere activar.
+   */
+  activeUser: async (req, res) => {
+    try {
+      const userToDesactive = await db.Users.findByPk(req.params.id);
+      const userActive = { ...userToDesactive, active: 1 };
+
+      await db.Users.update(userActive, { where: { id: req.params.id } });
+      res.status(200).json({ msg: "Usuario activado." });
+    } catch (error) {
+      res.status(503).json({ msg: "Ocurrió un error en el servidor" });
+    }
+  },
 };
