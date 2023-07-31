@@ -44,7 +44,7 @@ function UsersList({ userToken }) {
 
   if (loading) return <p>Cargando usuarios...</p>;
   return (
-    <section className="bg-blue-400 text-white">
+    <section className="bg-blue-300 text-white">
       {users && (
         <>
           <ul>

@@ -8,7 +8,7 @@ import { useUserContext } from "../context/UserContext";
 function NavBar() {
   const { user } = useUserContext();
   return (
-    <nav className="text-xl flex gap-4 justify-between px-1 py-2 bg-blue-200">
+    <nav className="text-xl w-full fixed flex gap-5 justify-between px-1 py-2 bg-blue-200">
       <Link to={"/"}>
         <img
           src="/logos/sn-logo.png"

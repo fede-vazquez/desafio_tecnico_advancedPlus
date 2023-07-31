@@ -62,7 +62,7 @@ function MainLoginForm() {
 
   if (loading) return <p>Procesando datos...</p>;
   return (
-    <section className="bg-blue-400 p-3">
+    <section className="p-3">
       <form
         onSubmit={(event) => {
           submitForm(event);
