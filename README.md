@@ -25,7 +25,7 @@ Prender Express en la carpeta "back-end" con "npm start" - Debe prenderse en el 
 
 ## Base de datos
 
-El código SQL para iniciar la db esta en el archivo db_sql dentro de la carpeta database en el back-end
+El código SQL para iniciar la db esta en el archivo desafio_tecnico_advancedPlus.sql dentro de la carpeta database en el back-end
 
 #### Usuario admin
 
